@@ -1,0 +1,45 @@
+---
+const links = [
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" }
+];
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50"
+>
+  <nav
+    class="mx-auto mt-4 flex w-[90%] max-w-6xl items-center justify-between rounded-full border border-white/10 bg-white/5 px-6 py-4 backdrop-blur-md"
+  >
+    <a
+      href="/"
+      class="font-semibold tracking-wide"
+    >
+      VS
+    </a>
+
+    <ul class="hidden gap-8 md:flex">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="text-sm text-zinc-400 transition hover:text-white"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a
+      href="/VidushiResumeV2.pdf"
+      class="rounded-full border border-white/10 px-4 py-2 text-sm transition hover:bg-white hover:text-black"
+    >
+      Resume
+    </a>
+  </nav>
+</header>

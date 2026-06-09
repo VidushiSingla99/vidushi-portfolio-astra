@@ -1,0 +1,107 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { projects } from "../../data/projects";
+import CaseStudySection from "../../components/CaseStudySection.astro";
+
+export async function getStaticPaths() {
+  return projects.map((project) => ({
+    params: {
+      slug: project.slug
+    },
+    props: {
+      project
+    }
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={project.title}>
+  <section class="mx-auto max-w-5xl px-6 py-28">
+
+    <a
+      href="/projects"
+      class="mb-12 inline-flex text-zinc-500 transition hover:text-white"
+    >
+      ← Back to Projects
+    </a>
+
+    <div
+      class="mb-16 h-[300px] rounded-3xl border border-white/10 bg-gradient-to-br from-violet-500/20 via-indigo-500/10 to-zinc-900"
+    ></div>
+
+    <p class="mb-4 text-sm uppercase tracking-[0.3em] text-zinc-500">
+      Case Study
+    </p>
+
+    <h1 class="text-5xl font-bold md:text-7xl">
+      {project.title}
+    </h1>
+
+    <p class="mt-6 max-w-3xl text-xl text-zinc-400">
+      {project.tagline}
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      {
+        project.stack.map((tech) => (
+          <span
+            class="rounded-full border border-white/10 px-4 py-2 text-sm text-zinc-300"
+          >
+            {tech}
+          </span>
+        ))
+      }
+    </div>
+
+    <CaseStudySection title="Overview">
+      <p class="text-zinc-400">{project.overview}</p>
+    </CaseStudySection>
+
+    <CaseStudySection title="Problem">
+      <p class="text-zinc-400">{project.problem}</p>
+    </CaseStudySection>
+
+    <CaseStudySection title="Solution">
+      <p class="text-zinc-400">{project.solution}</p>
+    </CaseStudySection>
+
+    <CaseStudySection title="Architecture">
+      <ul class="space-y-4">
+        {
+          project.architecture.map((item) => (
+            <li class="text-zinc-400">
+              • {item}
+            </li>
+          ))
+        }
+      </ul>
+    </CaseStudySection>
+
+    <CaseStudySection title="Challenges">
+      <ul class="space-y-4">
+        {
+          project.challenges.map((item) => (
+            <li class="text-zinc-400">
+              • {item}
+            </li>
+          ))
+        }
+      </ul>
+    </CaseStudySection>
+
+    <CaseStudySection title="Results">
+      <ul class="space-y-4">
+        {
+          project.results.map((item) => (
+            <li class="text-zinc-400">
+              • {item}
+            </li>
+          ))
+        }
+      </ul>
+    </CaseStudySection>
+
+  </section>
+</Layout>
