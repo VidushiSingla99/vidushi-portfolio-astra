@@ -1,43 +1,26 @@
-# Astro Starter Kit: Minimal
+What it is: Personal portfolio site.
+Stack: Astro 6 · React 19 (islands) · Framer Motion · Tailwind 4 · TypeScript
+Live: https://vidushi-portfolio-astra.vercel.app
 
-```sh
-npm create astro@latest -- --template minimal
-```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Folder map
+src/
+  pages/          → .astro files = routes (index.astro = homepage)
+  components/     → Astro + React components
+public/           → Images, fonts, static files served at root
+astro.config.mjs  → Astro config (React integration, Tailwind vite plugin)
+How Astro works (key mental model)
+.astro files = HTML templates with optional frontmatter (---) for server logic
+React components = used inside .astro via <Component client:load /> directive
+  client:load    → hydrates immediately (interactive on page load)
+  client:visible → hydrates when scrolled into view (better for perf)
+  client:idle    → hydrates when browser is idle
+No directive     → renders as static HTML only, no interactivity
+Key things to know
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Framer Motion is used for animations — it only works inside React components with a client: directive. Don't try to use it in .astro files directly.
+Tailwind 4 here uses the Vite plugin (@tailwindcss/vite), not PostCSS like the other two projects. Config is in astro.config.mjs, not tailwind.config.js.
+No tailwind.config.js file — Tailwind 4 is configured via CSS @theme directives in your stylesheet instead.
+Adding a new page = add a new .astro file in src/pages/. The filename becomes the URL route automatically.
+Static assets (images, resume PDF etc.) go in public/ and are referenced as /filename.ext (no public/ prefix in the path).
+Node ≥ 22.12.0 is required (specified in package.json engines field).
